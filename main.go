@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"math/rand/v2"
 	"slices"
 	"sync"
@@ -25,7 +24,7 @@ func generateRandomElements(size int) []int {
 func maximum(data []int) int {
 	// ваш код здесь
 	if len(data) == 0 {
-		return 0
+		panic("empty slice")
 	}
 	return slices.Max(data)
 }
@@ -37,7 +36,7 @@ func maxChunks(data []int) int {
 	}
 
 	var wg sync.WaitGroup
-	chunkSize := int(math.Ceil(float64(len(data) / CHUNKS)))
+	chunkSize := (len(data) + CHUNKS - 1) / CHUNKS
 	maxValues := make([]int, CHUNKS)
 
 	for i := 0; i < CHUNKS; i++ {
